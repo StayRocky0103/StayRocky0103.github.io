@@ -9,11 +9,9 @@ body, html {
     opacity: 1;
     transition: opacity 0.5s ease-in-out; /* Fade transition for page load */
 }
-
 body {
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewport="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>') 12 12, auto; /* Custom circle cursor */
 }
-
 .cursor {
     width: 20px;
     height: 20px;
@@ -60,11 +58,15 @@ body {
     height: 25px;
     cursor: pointer;
     z-index: 1001;
+    background-color: rgba(255, 255, 255, 0.3); /* Subtle background with transparency */
+    padding: 5px; /* Padding for better touch */
+    border-radius: 10px; /* Rounded corners */
+    transition: opacity 0.5s ease; /* Fade transition for menu */
 }
 
 .hamburger-menu div {
-    height: 4px;
-    background-color: #fff;
+    height: 3px;
+    background-color: #000000;
     border-radius: 2px;
     transition: all 0.3s ease;
 }
@@ -72,24 +74,32 @@ body {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #2c3e50; /* Lofi themed background color */
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1002;
     right: 20px;
     top: 55px;
+    text-align: center; /* Centering the theme words */
+    opacity: 0;
+    transition: opacity 0.5s ease; /* Fade transition for dropdown */
+    border-radius: 8px; /* Rounded corners for dropdown */
 }
 
 .dropdown-content a {
-    color: black;
+    color: #ecf0f1; /* Lofi themed text color */
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    background-color: #34495e; /* Lofi themed background color */
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {background-color: #1abc9c} /* Lofi themed hover color */
 
-.hamburger-menu:hover .dropdown-content {display: block;}
+.hamburger-menu:hover .dropdown-content {
+    display: block;
+    opacity: 0.9; /* Fade in dropdown content with slight transparency */
+}
 
 h1 {
     font-size: 4em;
