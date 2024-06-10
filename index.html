@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr.Rocky's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <video class="background-video" autoplay muted loop id="videoBG">
+        <source src="lofi.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <audio id="backgroundAudio" autoplay loop>
+        <source src="background.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="clickSound" preload="auto">
+        <source src="click.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+    <div class="hamburger-menu" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="dropdown-content">
+            <a href="#" onclick="changeVideo('rainy.mp4')">Rainy Theme</a>
+            <a href="#" onclick="changeVideo('sunny.mp4')">Sunny Theme</a>
+        </div>
+    </div>
+    <div class="content">
+        <h1>Welcome to My Portfolio</h1>
+        <p>Hi, I'm a Lofi Developer</p>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <a href="about.html" onclick="shatterTransition(event)">🙋‍♂️</a>
+            <a href="https://discord.gg/npJX29XyVP">🔗</a>
+        </div>
+    </div>
+    <div class="cursor" id="cursor"></div>
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            const cursor = document.getElementById('cursor');
+            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        });
+        document.addEventListener('click', function() {
+            const clickSound = document.getElementById('clickSound');
+            clickSound.play();
+        });
+        window.onload = function() {
+            const audioElement = document.getElementById('backgroundAudio');
+            audioElement.play();
+            const videoElement = document.getElementById('videoBG');
+            const savedVideoSrc = localStorage.getItem('videoSrc') || 'lofi.mp4';
+            videoElement.src = savedVideoSrc;
+            videoElement.play();
+        };
+
+        function shatterTransition(event) {
+            event.preventDefault();
+            const targetUrl = event.currentTarget.href;
+            const body = document.body;
+            body.style.transition = 'none';
+            body.style.animation = 'shatter 1s forwards';
+            setTimeout(function() {
+                window.location.href = targetUrl;
+            }, 1000); // Wait for the animation to complete
+        }
+
+        function toggleMenu() {
+            const dropdown = document.querySelector('.dropdown-content');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function changeVideo(videoSrc) {
+            const videoElement = document.getElementById('videoBG');
+            videoElement.src = videoSrc;
+            videoElement.play();
+            localStorage.setItem('videoSrc', videoSrc);
+        }
+    </script>
+    <style>
+        @keyframes shatter {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
+</body>
+</html>

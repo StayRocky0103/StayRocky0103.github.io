@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Mr.Rocky</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <video class="background-video" autoplay muted loop id="videoBG">
+        <source src="lofi.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <audio id="clickSound" preload="auto">
+        <source src="click.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+    <div class="hamburger-menu" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="dropdown-content">
+            <a href="#" onclick="changeVideo('rainy.mp4')">Rainy Theme</a>
+            <a href="#" onclick="changeVideo('sunny.mp4')">Sunny Theme</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="card">
+            <h1>About Me</h1>
+            <p>Hello, I'm Mr.Rocky, a dedicated Full-Stack Developer with a strong passion for both front-end and back-end development. I strive to build seamless, scalable, and efficient applications that provide engaging user experiences.</p>
+            <p>Throughout my passion for development, I have developed hundreds of projects ranging from websites, to mobile apps, to discord bots and much more.</p>
+        </div>
+        <div class="link-container" style="display: flex; justify-content: center; gap: 10px; position: relative; z-index: 0; top: -130px;">
+            <a href="index.html" onclick="shatterTransition(event)">🏠</a>
+            <a href="https://discord.gg/npJX29XyVP">🔗</a>
+        </div>
+    </div>
+    <div class="cursor" id="cursor"></div>
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            const cursor = document.getElementById('cursor');
+            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        });
+        document.addEventListener('click', function() {
+            const clickSound = document.getElementById('clickSound');
+            clickSound.play();
+        });
+        window.onload = function() {
+            const videoElement = document.getElementById('videoBG');
+            const savedVideoSrc = localStorage.getItem('videoSrc') || 'lofi.mp4';
+            videoElement.src = savedVideoSrc;
+            videoElement.play();
+        };
+
+        function shatterTransition(event) {
+            event.preventDefault();
+            const targetUrl = event.currentTarget.href;
+            const body = document.body;
+            body.style.transition = 'none';
+            body.style.animation = 'shatter 1s forwards';
+            setTimeout(function() {
+                window.location.href = targetUrl;
+            }, 1000); // Wait for the animation to complete
+        }
+
+        function toggleMenu() {
+            const dropdown = document.querySelector('.dropdown-content');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function changeVideo(videoSrc) {
+            const videoElement = document.getElementById('videoBG');
+            videoElement.src = videoSrc;
+            videoElement.play();
+            localStorage.setItem('videoSrc', videoSrc);
+        }
+    </script>
+    <style>
+        .card {
+            background: rgba(255, 255, 255, 0.1); /* Increased transparency */
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1; /* Ensures the card is above the buttons */
+        }
+        @keyframes shatter {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
+</body>
+</html>
