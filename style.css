@@ -121,16 +121,17 @@ a:hover {
 
 @media (max-width: 768px) {
     body, html {
-        height: auto;
+        height: 100%;
         overflow: auto;
     }
 
     .background-video {
-        display: none; /* Hide video on small devices to improve performance */
+        width: 100%;
+        height: auto;
     }
 
     .content {
-        height: auto;
+        height: 100%;
         padding: 20px;
     }
 
