@@ -20,13 +20,13 @@
         Your browser does not support the audio tag.
     </audio>
     <div class="hamburger-menu" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div class="dropdown-content">
-            <a href="#" onclick="changeVideo('rainy.mp4')">Rainy Theme</a>
-            <a href="#" onclick="changeVideo('sunny.mp4')">Sunny Theme</a>
-        </div>
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+    </div>
+    <div class="dropdown-content" style="display: none; background: rgba(0, 0, 0, 0.0); border-radius: 8px; overflow: hidden;">
+        <a href="#" onclick="changeVideo('rainy.mp4')" style="background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 10px; margin: 5px;">Rainy Theme</a>
+        <a href="#" onclick="changeVideo('sunny.mp4')" style="background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 10px; margin: 5px;">Sunny Theme</a>
     </div>
     <div class="content">
         <h1>Welcome to My Portfolio</h1>
@@ -68,7 +68,14 @@
 
         function toggleMenu() {
             const dropdown = document.querySelector('.dropdown-content');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            if (dropdown.style.display === 'block') {
+                dropdown.style.display = 'none';
+                dropdown.style.opacity = '0';
+            } else {
+                dropdown.style.display = 'block';
+                dropdown.style.opacity = '1';
+                dropdown.style.transition = 'opacity 0.5s ease';
+            }
         }
 
         function changeVideo(videoSrc) {
