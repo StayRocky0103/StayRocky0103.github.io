@@ -30,7 +30,7 @@
         <source src="click.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
     </audio>
-    <div class="tip" style="position: fixed; top: 0; left: 0; background: rgba(0, 0, 0, 0.5); color: white; padding: 10px; font-size: 14px; z-index: 1001; animation: blink 2s infinite;">
+    <div class="tip" id="tip" style="position: fixed; top: 0; left: 0; background: rgba(0, 0, 0, 0.5); color: white; padding: 10px; font-size: 14px; z-index: 1001; animation: blink 3s infinite;">
         Tip: Click once for background music to play
     </div>
     <div class="hamburger-menu" onclick="toggleMenu()">
@@ -55,6 +55,7 @@
         document.addEventListener('mousemove', function(e) {
             const cursor = document.getElementById('cursor');
             cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            cursor.style.boxShadow = `0 0 15px 5px rgba(0, 0, 0, 0.5)`;
         });
         document.addEventListener('click', function() {
             const clickSound = document.getElementById('clickSound');
@@ -100,6 +101,21 @@
             videoElement.play();
             localStorage.setItem('videoSrc', videoSrc);
         }
+
+        // Tip changing logic
+        const tips = [
+            "Tip: Click once for background music to play",
+            "Tip: Only view on PC til mobile version is fixed.",
+            "Tip: Join the Discord server to give feedback."
+        ];
+        let tipIndex = 0;
+        document.getElementById('tip').addEventListener('animationiteration', () => {
+            tipIndex = (tipIndex + 1) % tips.length;
+            setTimeout(() => {
+                document.getElementById('tip').textContent = tips[tipIndex];
+                document.getElementById('tip').style.opacity = '1'; // Show new tip after animation
+            }, 1500); // Delay corresponds to the blink animation duration
+        });
     </script>
     <style>
         @keyframes shatter {
