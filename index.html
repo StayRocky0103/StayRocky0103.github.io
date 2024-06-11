@@ -5,13 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mr.Rocky's Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        // Disable right-click to prevent access to Inspect Element
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // Disable F12 key and Ctrl+Shift+I to prevent access to DevTools
+        document.addEventListener('keydown', event => {
+            if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
+                event.preventDefault();
+            }
+        });
+    </script>
 </head>
 <body>
     <video class="background-video" autoplay muted loop id="videoBG">
         <source src="lofi.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    <audio id="backgroundAudio" autoplay loop>
+    <audio id="backgroundAudio" loop>
         <source src="background.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
@@ -19,6 +30,9 @@
         <source src="click.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
     </audio>
+    <div class="tip" style="position: fixed; top: 0; left: 0; background: rgba(0, 0, 0, 0.5); color: white; padding: 10px; font-size: 14px; z-index: 1001; animation: blink 2s infinite;">
+        Tip: Click once for background music to play
+    </div>
     <div class="hamburger-menu" onclick="toggleMenu()">
         <div class="menu-line"></div>
         <div class="menu-line"></div>
@@ -48,7 +62,9 @@
         });
         window.onload = function() {
             const audioElement = document.getElementById('backgroundAudio');
-            audioElement.play();
+            document.body.addEventListener('click', function() {
+                audioElement.play();
+            }, { once: true });
             const videoElement = document.getElementById('videoBG');
             const savedVideoSrc = localStorage.getItem('videoSrc') || 'lofi.mp4';
             videoElement.src = savedVideoSrc;
@@ -97,6 +113,15 @@
             }
             100% {
                 transform: scale(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
                 opacity: 0;
             }
         }
