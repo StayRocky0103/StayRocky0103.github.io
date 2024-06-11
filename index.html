@@ -5,14 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mr.Rocky's Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
     <script>
+        // Custom function to handle password verification for DevTools access
+        function verifyPassword() {
+            const password = prompt("What's the password?");
+            if (password === "rocky0103") {
+                console.log("Access granted.");
+            } else {
+                alert("Access denied.");
+                event.preventDefault(); // Prevent DevTools from opening
+            }
+        }
+
         // Disable right-click to prevent access to Inspect Element
         document.addEventListener('contextmenu', event => event.preventDefault());
 
         // Disable F12 key and Ctrl+Shift+I to prevent access to DevTools
         document.addEventListener('keydown', event => {
             if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
-                event.preventDefault();
+                verifyPassword();
             }
         });
     </script>
