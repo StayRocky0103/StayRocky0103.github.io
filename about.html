@@ -11,6 +11,10 @@
         <source src="lofi.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
+    <audio id="backgroundAudio" loop>
+        <source src="background.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
     <audio id="clickSound" preload="auto">
         <source src="click.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
@@ -46,6 +50,10 @@
             clickSound.play();
         });
         window.onload = function() {
+            const audioElement = document.getElementById('backgroundAudio');
+            document.body.addEventListener('click', function() {
+                audioElement.play();
+            }, { once: true });
             const videoElement = document.getElementById('videoBG');
             const savedVideoSrc = localStorage.getItem('videoSrc') || 'lofi.mp4';
             videoElement.src = savedVideoSrc;
